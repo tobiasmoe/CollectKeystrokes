@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title> Simulation of free text data collection </title>
+{% endblock %}
+
+{% block intro %}
+<p> This webpage collects keystrokes that are entered in the textarea for free text simulation</p>
+<p> For password simulation go to: <a href="{{url_for('view.input')}}">Input</a></p>
+{% endblock %}
+
+
+{% block content %}
+<textarea id="centerme"></textarea>
+{% endblock %}
+
+
+{% block script %}
+<script>
+	var last_ev = null;
+	var user = 1;
+	var keytype = null;
+	var timestamp = null;
+	var timepreviousKey = 0;
+
+    function StreamEvent(event) {      
+    	if (event.type == 'keydown') {
+    		keytype = 0;
+    	}
+    	else {
+    		keytype = 1;
+    	}
+
+
+    	timestamp = new Date().getTime();
+
+    	if (last_ev != null) {
+    		timepreviousKey = timestamp - last_ev.clockTime;
+        }
+
+        var ev = {
+        		user_id: user,
+        		type: keytype,
+                clockTime: timestamp,		// alternatively, performance.now() https://github.com/w3c/hr-time https://github.com/w3c/hr-time/issues/56
+                //timestamp: event.timeStamp,
+                //altkey: event.altKey,
+                //metakey: event.metaKey,
+                key: event.key,
+                keyCode: event.keyCode,
+                lastkey: timepreviousKey,
+                //target: event.target.name,
+                //type: event.type,
+                //button: event.button,
+                //buttons: event.buttons,
+                //pageX: event.pageX,
+                //pageY: event.pageY,
+                //screenX: event.screenX,
+                //screenY: event.screenY,
+        };       
+    	$.ajax({
+    		type: 'POST',
+    		url: "{{url_for('view.input')}}",
+    		contentType: "application/json",
+    		dataType: "json",
+    		data: JSON.stringify(ev),
+    		success: function(response) {
+	            console.log(response);
+	        },
+	        error: function(response) {
+	            console.log(response);
+	        }
+    	});
+
+    	if (event.key == 'Enter') {
+        	user++;
+        	last_ev = null;
+        	timepreviousKey = 0;
+        	$('#centerme').val("");
+        }
+        else {
+        	
+        }
+
+        last_ev = ev;
+    }
+    
+
+  $("#centerme").keydown(function(event){
+  	//var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
+    StreamEvent(event);
+  });
+  $("#centerme").keyup(function(event){
+    //var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
+    StreamEvent(event);
+  });
+
+
+  function sleepRand(time) {
+    var now = new Date().getTime();
+    var end = (now + (Math.random() * parseInt(time)) + 1);
+    while(new Date().getTime() < end){ /* do nothing */ }
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,171 @@
+<!doctype html>
+{% block title %}
+
+{% endblock %}
+<link rel="stylesheet" href="https://unpkg.com/sakura.css@1.0.0/css/normalize.css">
+<link rel="stylesheet" href="https://unpkg.com/sakura.css@1.0.0/css/sakura-earthly.css">
+<style>
+  ul { margin: 0; padding: 0; display: flex; list-style-type: none; }
+  li > * { padding: 1em; }
+  li.active > a { color: #5e5e5e; border-bottom: 2px solid #4a4a4a; }
+  form { display: flex; }
+  label > input { width: 3em; }
+  form > * { padding-right: 1em; }
+  #result { font-weight: bold; }
+  #centerme{ display: center; }
+  textarea {
+	  width: 650px;
+	  height: 250px;
+	}
+</style>
+</ul>
+<hr>
+{% block intro %}
+
+{% endblock %}
+<hr>
+{% block content %} 
+
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+{% block script %}
+
+{% endblock %}
+
+<script>
+	/*
+	var EventBuffer = new Array();
+	var last_event = null;
+	var last_ev = null;
+	var user = 6;
+	var last_key = "";
+	var last_keydown = null;
+	var last_keyup = null;
+	var keysdown = {};
+	var dd = null;
+	var ud = null;
+	var dwellTimes = {};
+
+    function StreamEvent(event) {      
+
+        var ev = {
+        		user_id: user,
+        		type: event.type,
+                clockTime: new Date().getTime(),		// alternatively, performance.now() https://github.com/w3c/hr-time https://github.com/w3c/hr-time/issues/56
+                timestamp: event.timeStamp,
+                altkey: event.altKey,
+                //metakey: event.metaKey,
+                key: event.key,
+                keyCode: event.keyCode,
+                //target: event.target.name,
+                //type: event.type,
+                //button: event.button,
+                //buttons: event.buttons,
+                //pageX: event.pageX,
+                //pageY: event.pageY,
+                //screenX: event.screenX,
+                //screenY: event.screenY,
+        };
+
+        if (ev.type == 'keydown') {
+        	if (last_keydown != null) {
+        		dd = (ev.clockTime - last_keydown.clockTime)/1000;
+	          	console.log("DD: " + last_keydown.key + "/" + ev.key + " | " + dd); // get number of seconds between each keypress (gap time)
+	        }
+	        if (last_keyup != null) {
+	        	ud = (ev.clockTime - last_keyup.clockTime)/1000;
+        		console.log("UD: " + last_keyup.key + "/" + ev.key + " | " + ud);
+        		console.log("H: " + (dd - ud).toFixed(3));
+        	}
+	        last_keydown = ev;
+
+	        // if (!keysdown[ev.key]) {
+	        //	keysdown[ev.key] = true;
+	        //}
+
+        } else {
+        	last_keyup = ev;
+        }
+
+
+    
+        EventBuffer.push(ev);
+        //console.log(EventBuffer);
+        //console.log(ev);
+        if (event.key == 'Enter') {
+        	user++;
+        	$.ajax({
+        		type: 'POST',
+        		url: "{{url_for('view.index')}}",
+        		contentType: "application/json",
+        		dataType: "json",
+        		data: JSON.stringify(EventBuffer),
+        		success: function(response) {
+		            console.log(response);
+		        },
+		        error: function(response) {
+		            console.log(response);
+		        }
+        	});
+        	EventBuffer = new Array();
+        	last_ev = null;
+        	$('#centerme').val("");
+        }
+        last_ev = ev;
+        last_event = event;
+        last_key = ev.key;
+
+        //console.log(last_ev);
+        //console.log(JSON.stringify(last_ev));
+    }
+    
+
+  $("#centerme").keydown(function(event){
+    //$("#centerme").css("background-color", "yellow");
+    StreamEvent(event);
+    //var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
+  });
+  $("#centerme").keyup(function(event){
+    //$("#centerme").css("background-color", "pink");
+    //var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
+    StreamEvent(event);
+  });
+
+
+  function sleepRand(time) {
+    var now = new Date().getTime();
+    var end = (now + (Math.random() * parseInt(time)) + 1);
+    while(new Date().getTime() < end){
+    // do nothing 
+     }
+  }
+
+
+    //$(document).keydown(StreamEvent);
+    //$(document).keyup(StreamEvent);
+    //$(document).keypress(StreamEvent);
+    //$(document).mousemove(StreamEvent);
+    //$(document).click(StreamEvent);
+
+    
+/*
+//var start = new Date().getTime(),
+var start = window.performance.now();
+    elapsed = '0.0';
+
+// setTimeout is needed in order to change interval during running
+window.setInterval(function()
+{
+    //var time = new Date().getTime() - start;
+    var time = window.performance.now() - start;
+
+    elapsed = Math.floor(time / 100) / 10;
+    if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
+
+    console.log(time);
+    //document.title = elapsed;
+
+}, 1000);
+*/
+</script>
