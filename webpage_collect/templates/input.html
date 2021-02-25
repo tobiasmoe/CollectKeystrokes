@@ -19,10 +19,10 @@
 {% block script %}
 <script>
 	var last_ev = null;
-	var user = 1;
 	var keytype = null;
 	var timestamp = null;
 	var timepreviousKey = 0;
+	var counter = 1, session = 1, user = 1;
 
     function StreamEvent(event) {      
     	if (event.type == 'keydown') {
@@ -41,6 +41,7 @@
 
         var ev = {
         		user_id: user,
+        		session_id: session,
         		type: keytype,
                 clockTime: timestamp,		// alternatively, performance.now() https://github.com/w3c/hr-time https://github.com/w3c/hr-time/issues/56
                 //timestamp: event.timeStamp,
@@ -57,7 +58,7 @@
                 //pageY: event.pageY,
                 //screenX: event.screenX,
                 //screenY: event.screenY,
-        };       
+        }; 
     	$.ajax({
     		type: 'POST',
     		url: "{{url_for('view.input')}}",
@@ -71,12 +72,22 @@
 	            console.log(response);
 	        }
     	});
-
-    	if (event.key == 'Enter') {
-        	user++;
+    	if (event.key == 'Enter' && event.type == "keyup") {
+    		if (counter==50) {
+    			if (session==8) {
+    				user++;
+    				session=1;
+    			} else {
+    				session++;
+    			}
+    			counter=1;
+    		} else {
+    			counter++;
+    		}
         	last_ev = null;
         	timepreviousKey = 0;
         	$('#centerme').val("");
+        	console.log("User: " + user + "\nSession: " + session + "\nCounter: " + counter);
         }
 
         last_ev = ev;
