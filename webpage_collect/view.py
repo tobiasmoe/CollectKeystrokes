@@ -28,9 +28,9 @@ def input():
           #  db.commit()
         db = get_db()
         db.execute(
-                'INSERT INTO keystrokes (user_id, session_id, type, key, keycode, clocktime, lastkey)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?)',
-                (req['user_id'], req['session_id'], req['type'], req['key'], req['keyCode'], req['clockTime'], req['lastkey'])
+                'INSERT INTO keystrokes (user_id, session_id, repetition, type, key, keycode, clocktime, lastkey)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                (req['user_id'], req['session_id'], req['repetition'], req['type'], req['key'], req['keyCode'], req['clockTime'], req['lastkey'])
         )
         db.commit()
     return render_template('input.html')

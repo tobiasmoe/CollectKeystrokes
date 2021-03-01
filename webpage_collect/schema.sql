@@ -4,6 +4,7 @@ CREATE TABLE keystrokes (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	user_id INTEGER,
 	session_id INTEGER,
+	repetition INTEGER,
 	type BIT,
 	key TEXT,
 	keycode BIGINT,

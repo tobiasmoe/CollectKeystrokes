@@ -60,7 +60,7 @@
                 //screenX: event.screenX,
                 //screenY: event.screenY,
         }; 
-    	/*
+
     	$.ajax({
     		type: 'POST',
     		url: "{{url_for('view.input')}}",
@@ -74,8 +74,8 @@
 	            console.log(response);
 	        }
     	});
-    	*/
-    	console.log(ev.lastkey);
+    	
+    	//console.log(ev.lastkey);
     	if (event.key == 'Enter' && event.type == "keyup") {
     		if (counter==50) {
     			if (session==8) {
@@ -91,7 +91,7 @@
         	last_ev = null;
         	timepreviousKey = 0;
         	$('#centerme').val("");
-        	console.log("User: " + user + "\nSession: " + session + "\nCounter: " + counter);
+        	//console.log("User: " + user + "\nSession: " + session + "\nCounter: " + counter);
         }
         else {
         	last_ev = ev;
