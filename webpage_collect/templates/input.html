@@ -89,9 +89,10 @@
         	$('#centerme').val("");
         	console.log("User: " + user + "\nSession: " + session + "\nCounter: " + counter);
         }
-
-        last_ev = ev;
-    }
+	else {
+        	last_ev = ev;
+	}    
+  }
     
 
   $("#centerme").keydown(function(event){
