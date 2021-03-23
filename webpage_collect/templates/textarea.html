@@ -7,7 +7,7 @@
 
 {% block intro %}
 <p> This webpage collects keystrokes that are entered in the textarea for free text simulation</p>
-<p> For password simulation go to: <a href="{{url_for('view.input')}}">Input</a><input class="inputtext" id="userid" size="2"><input class="inputtext" id="session" size="2"><button id="clearfield" onclick="clearField()">Clear field</button></p>
+<p> For password simulation go to: <a href="{{url_for('view.input')}}">Input</a><input type="number" class="inputtext" id="userid" value="1"><input type="number" class="inputtext" id="session" value="1"><button id="clearfield" onclick="clearField()">Clear field</button></p>
 {% endblock %}
 
 
@@ -32,7 +32,6 @@
     	else {
     		keytype = 1;
     	}
-
 
     	timestamp = new Date().getTime();
 
@@ -102,8 +101,11 @@
 	}
 
 	function clearField() {
+
+		document.getElementById("userid").stepUp();
+		document.getElementById("session").stepUp();
+
 		$('#centerme').val("");
-		$('.inputtext').val("");
 		last_ev = null;
         timepreviousKey = 0;
 	}

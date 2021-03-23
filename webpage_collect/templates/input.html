@@ -102,11 +102,11 @@
     
 
   $("#centerme").keydown(function(event){
-  	//var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
+  	var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
     StreamEvent(event);
   });
   $("#centerme").keyup(function(event){
-    //var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
+    var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
     StreamEvent(event);
   });
 
