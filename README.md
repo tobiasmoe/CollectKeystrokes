@@ -1,24 +1,28 @@
-# Commands to start flask in debug mode
-git clone https://github.com/tobiasmoe/msthesis
-cd msthesis/
-apt install python3-pip
-apt install sqlite3
-pip install Flask
-export FLASK_APP=webpage_collect
-export FLASK_ENV=development
-flask init-db // initalize database, new folder created called "instance" inside is db file called flaskr.sqlite3
-flask run
+# Pre installation
+This is only tested on Linux <br>
+Clone this git repository then cd into it <br>
 
-go to localhost:5000 in webbrowser
-you should now see the webpage
+# Commands to start flask in debug mode <br>
+__apt install python3-pip__ <br>
+__apt install sqlite3__ <br>
+__pip install Flask__ <br>
+__export FLASK_APP=webpage_collect__ <br>
+__export FLASK_ENV=development__ <br>
+__flask init-db__ // initalize database, new folder created called "instance" inside is db file called flaskr.sqlite3. Can also be used to "wipe" database <br>
+__flask run__ <br>
 
-run simulation program
+go to localhost:5000 in webbrowser <br>
+you should now see the webpage <br>
 
-extract timing information from database
-inside instance folder
-sqlite3 flaskr.sqlite3
-.headers on
-.mode csv
-.output data.csv
-SELECT * FROM keystrokes;
-.quit
+run keystroke simulation program that will enter information into the input field <br>
+
+# Extract timing information from database
+inside instance folder <br>
+__sqlite3 flaskr.sqlite3__ <br> 
+__.headers on__ <br>
+__.mode csv__ <br> 
+__.output data.csv__ <br>
+__SELECT * FROM keystrokes;__ <br>
+__.quit__ <br>
+
+Now you have timing information in csv format.
