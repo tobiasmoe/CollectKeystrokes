@@ -8,7 +8,7 @@
 
 {% block intro %}
 <p> This webpage collects keystrokes that are entered in the input area for password simulation</p>
-<p> For free text simulation go to: <a href="{{url_for('view.textarea')}}">Textarea</a></p>
+<!-- <p> For free text simulation go to: <a href="{{url_for('view.textarea')}}">Textarea</a></p> -->
 {% endblock %}
 
 {% block content %}
@@ -40,10 +40,10 @@
         }
 
         var ev = {
-        		user_id: user,
-        		session_id: session,
-        		repetition: counter,
-        		type: keytype,
+        	user_id: user,
+        	session_id: session,
+        	repetition: counter,
+        	type: keytype,
                 clockTime: timestamp,		// alternatively, performance.now() https://github.com/w3c/hr-time https://github.com/w3c/hr-time/issues/56
                 //timestamp: event.timeStamp,
                 //altkey: event.altKey,
@@ -102,11 +102,11 @@
     
 
   $("#centerme").keydown(function(event){
-  	var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
+    // var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
     StreamEvent(event);
   });
   $("#centerme").keyup(function(event){
-    var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
+    // var shouldSleep = Math.round(Math.random()) < 0.5 ? sleepRand(200) : false;
     StreamEvent(event);
   });
 
