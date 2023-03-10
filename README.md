@@ -1,3 +1,8 @@
+# Background
+This is a simple webpage written in Flask. <br>
+It hosts a simple webpage that allows you to collect timing information from keystrokes written into an input field. <br>
+This program was created to be used by the following simulation program: https://github.com/tobiasmoe/SimulateKeystrokes <br>
+
 # Pre installation
 This is only tested on Linux <br>
 Clone this git repository then cd into it <br>
